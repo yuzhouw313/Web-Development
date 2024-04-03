@@ -118,9 +118,43 @@
       </ul>
     </main>
     
+    <style>
+
+      h2:hover {
+        cursor: pointer
+      }
+    </style>
+
     <script>
       // TO DO: Your code goes here
-      
+      // window.alert("Hey There!"); // rendering happening, but need to click "OK" to see the page
+
+      // Challenge 2
+      function doNotGoToApple(event) {
+        console.log(event)
+         //if only this line then only add alert to what's already established, 
+         // and the default behavior is in queue and my function is just first
+        window.alert("Nope Mwahahahahahahahahahahahahaha!!!!")
+        event.preventDefault(); //javascript not only change appearance but also behavior
+      }
+      const appleLink = document.querySelector("#apple")
+      appleLink.addEventListener("click", doNotGoToApple)
+
+
+      // Challenge 1
+      // JavaScript functions don't care argument, no return
+      function whenHeadingClicked(event){
+        //window.alert("Aha you just clicked the heading!")
+        //const heading = document.querySelector("h2")
+        //heading.style.display = "none"
+        console.log("The event data is:", event)
+        event.target.style.display = "none"
+      } 
+
+      let heading = document.querySelector("h2")
+      heading.addEventListener("click", whenHeadingClicked) // subscribe and publish
+      //let ul = document.querySelector("ul")
+      //ul.addEventListener("click", whenHeadingClicked)
     </script>
 
   </body>

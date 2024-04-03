@@ -4,6 +4,21 @@ const pickRandomNumber = function() {
 }
 
 // Your code goes here...
+function onDocumentLoaded() {
+  // console.log("Document loaded")
+  const link = document.querySelector("main a")
+  link.addEventListener("click", rollTheDice)
+}
 
+function rollTheDice(event) {
+  event.preventDefault();
+  let n1 = pickRandomNumber()
+  let n2 = pickRandomNumber()
+  let images = document.querySelectorAll("#dice img")
+  images[0].src = "images/" + n1 + ".png" //javascript allow automatic cast so can combine strings
+  images[1].src = "images/" + n2 + ".png"
+}
+
+document.addEventListener("DOMContentLoaded", onDocumentLoaded) //after DOM establish and before visual
 
 
