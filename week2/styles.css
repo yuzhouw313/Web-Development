@@ -1,0 +1,33 @@
+body {
+  box-sizing: border-box;
+  font-family: system-ui;
+  background-color: blanchedalmond;
+}
+
+#movie_columns {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+}
+
+@media (width < 600px) {
+  #movie_columns {
+    display: block;
+  }
+}
+
+h1 {
+  text-align: center;
+}
+
+img {
+  max-width: 75%;
+}
+
+article {
+  flex-basis: 30%;
+  background-color: whitesmoke;
+  text-align: center;
+  margin-bottom: 24px;
+  padding: 8px;
+}
