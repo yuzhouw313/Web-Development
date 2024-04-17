@@ -11,7 +11,7 @@ function onDocumentLoaded() {
 }
 
 function rollTheDice(event) {
-  event.preventDefault();
+  event.preventDefault(); // without it will very quickly reload the page to default from dice.html
   let n1 = pickRandomNumber()
   let n2 = pickRandomNumber()
   let images = document.querySelectorAll("#dice img")
