@@ -1,5 +1,4 @@
-// import React, { useState } from 'react';
-import { React, useState } from 'react';
+import React, { useState } from 'react';
 
 function Movie(props) {
   return (
@@ -11,7 +10,7 @@ function Movie(props) {
         <span className="badge bg-primary mx-3">
           {props.vote_average.toFixed(1)}
         </span>
-        <LikeButton clicked={props.liked} counter={props.likes} key={props.title}/>
+        <LikeButton/>
       </p>
     </div>
   )
@@ -19,34 +18,19 @@ function Movie(props) {
 
 function LikeButton(props) {
   
-  //useState a function from React and return an array, first element is state 
-  // the second is a function to change the state, input 0 is the default, then will be updated
-  // const [counter, setCounter]  = useState(0) 
+  const [counter, setCounter] = useState(0)
 
   function handleClick(event) {
-    event.preventDefault()
-    props.clicked({ props.title: props.couner + 1})
-    // setCounter(counter + 1)
+    console.log(event)
+    setCounter(counter + 1)
   }
 
-
-    return (
-      <button onClick={handleClick} className="text-decoration-none btn text-danger ">&hearts; <span>{props.counter}</span></button>
-    )
+  return (
+    <button onClick={handleClick} className="text-decoration-none btn text-danger ">&hearts; <span>{counter}</span></button>
+  )
 }
 
 function App() {
-
-  function handleTopRated(props) {
-    const url = urlForMovies("top_rated")
-    fetch(url).then((r) => r.json()).then((internet_data) => setData(internet_data.results))
-  }
-
-  function handleNowPlaying(props){
-    const url = urlForMovies("now_playing")
-    fetch(url).then((r) => r.json()).then((internet_data) => setData(internet_data.results))
-  }
-
 
   const initialData = [
     { title: "The Princess Bride", poster_path: '/dvjqlp2sAhUeFjUOfQDgqwpphHj.jpg', release_date: '1999', vote_average: 10 },
@@ -59,10 +43,18 @@ function App() {
     { title: "Toy Story", poster_path: '/uXDfjJbdP4ijW5hWSBrPrlKpxab.jpg', release_date: '1999', vote_average: 10 },
   ]
 
-  const [likes, setLikes] = useState( {} )
   const [data, setData] = useState(initialData)
+  
+  const movies = data.map(movie_data => <Movie title={movie_data.title} release_date={movie_data.release_date} poster_path={movie_data.poster_path} vote_average={movie_data.vote_average} />)
 
-  const movies = data.map(movie_data => <Movie liked={setLikes} likes={likes[movie_data.title] || 0} key={movie_data.title} title={movie_data.title} release_date={movie_data.release_date} poster_path={movie_data.poster_path} vote_average={movie_data.vote_average} />)
+  function handleTopRated(props) {
+    const url = urlForMovies("top_rated")
+    fetch(url).then((r) => r.json()).then((internet_data) => setData(internet_data.results))
+  }
+  function handleNowPlaying(props) {
+    const url = urlForMovies("now_playing")
+    fetch(url).then((r) => r.json()).then((internet_data) => setData(internet_data.results))
+  }
 
   return (
     <div>
